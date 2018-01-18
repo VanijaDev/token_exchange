@@ -73,14 +73,14 @@ contract Exchange is Owned {
     //////////////////////////////////
     // DEPOSIT AND WITHDRAWAL ETHER //
     //////////////////////////////////
-    function depositEther() public payable {
-    }
+    // function depositEther() public payable {
+    // }
 
-    function withdrawEther(uint amountInWei) public {
-    }
+    // function withdrawEther(uint amountInWei) public {
+    // }
 
-    function getEthBalanceInWei() public constant returns (uint) {
-    }
+    // function getEthBalanceInWei() public constant returns (uint) {
+    // }
 
 
     //////////////////////
@@ -139,14 +139,14 @@ contract Exchange is Owned {
     //////////////////////////////////
     // DEPOSIT AND WITHDRAWAL TOKEN //
     //////////////////////////////////
-    function depositToken(string symbolName, uint amount) public {
-    }
+    // function depositToken(string symbolName, uint amount) public {
+    // }
 
-    function withdrawToken(string symbolName, uint amount) public {
-    }
+    // function withdrawToken(string symbolName, uint amount) public {
+    // }
 
-    function getBalance(string symbolName) public view returns (uint) {
-    }
+    // function getBalance(string symbolName) public view returns (uint) {
+    // }
 
 
 
@@ -155,23 +155,23 @@ contract Exchange is Owned {
     /////////////////////////////
     // ORDER BOOK - BID ORDERS //
     /////////////////////////////
-    function getBuyOrderBook(string symbolName) public view returns (uint[], uint[]) {
-    }
+    // function getBuyOrderBook(string symbolName) public view returns (uint[], uint[]) {
+    // }
 
 
-    /////////////////////////////
-    // ORDER BOOK - ASK ORDERS //
-    /////////////////////////////
-    function getSellOrderBook(string symbolName)public view returns (uint[], uint[]) {
-    }
+    // /////////////////////////////
+    // // ORDER BOOK - ASK ORDERS //
+    // /////////////////////////////
+    // function getSellOrderBook(string symbolName)public view returns (uint[], uint[]) {
+    // }
 
 
 
-    ////////////////////////////
-    // NEW ORDER - BID ORDER //
-    ///////////////////////////
-    function buyToken(string symbolName, uint priceInWei, uint amount) public {
-    }
+    // ////////////////////////////
+    // // NEW ORDER - BID ORDER //
+    // ///////////////////////////
+    // function buyToken(string symbolName, uint priceInWei, uint amount) public {
+    // }
 
 
 
@@ -180,16 +180,16 @@ contract Exchange is Owned {
     ////////////////////////////
     // NEW ORDER - ASK ORDER //
     ///////////////////////////
-    function sellToken(string symbolName, uint priceInWei, uint amount) {
-    }
+    // function sellToken(string symbolName, uint priceInWei, uint amount) public {
+    // }
 
 
 
-    //////////////////////////////
-    // CANCEL LIMIT ORDER LOGIC //
-    //////////////////////////////
-    function cancelOrder(string symbolName, bool isSellOrder, uint priceInWei, uint offerKey) {
-    }
+    // //////////////////////////////
+    // // CANCEL LIMIT ORDER LOGIC //
+    // //////////////////////////////
+    // function cancelOrder(string symbolName, bool isSellOrder, uint priceInWei, uint offerKey) public {
+    // }
 
 
 
