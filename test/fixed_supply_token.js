@@ -10,7 +10,7 @@ contract('FixedSupplyToken', (accounts) => {
   });
 
   afterEach('reset state', async() => {
-    tokenInst = await FixedSupplyToken.deployed();
+    tokenInst = await FixedSupplyToken.new();
   });
 
   describe('initial values', () => {
