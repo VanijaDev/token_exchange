@@ -86,8 +86,9 @@ contract Exchange is Owned {
         msg.sender.transfer(amountInWei);
     }
 
-    // function getEthBalanceInWei() public constant returns (uint) {
-    // }
+    function getEthBalanceInWei() public constant returns (uint) {
+        return balanceEthForAddress[msg.sender];
+    }
 
 
     //////////////////////
@@ -146,14 +147,56 @@ contract Exchange is Owned {
     //////////////////////////////////
     // DEPOSIT AND WITHDRAWAL TOKEN //
     //////////////////////////////////
-    // function depositToken(string symbolName, uint amount) public {
-    // }
+    function depositToken(string symbolName, uint amount) public {
+        require(amount > 0);
 
-    // function withdrawToken(string symbolName, uint amount) public {
-    // }
+        //  get token index
+        uint8 idx = getSymbolIndex(symbolName); 
+        require(idx > 0);
 
-    // function getBalance(string symbolName) public view returns (uint) {
-    // }
+        //  get token address
+        address tokenAddr = tokens[idx].tokenContract;
+        require(tokenAddr != address(0x0));
+
+        //  create ERC20Interface token instance
+        ERC20Interface erc20Token = ERC20Interface(tokenAddr);
+
+        //  transfer token amount from sender to exchange
+        require(erc20Token.transferFrom(msg.sender, this, amount) == true);
+        
+        //  transfer token in local tokenBalanceForAddress
+        require(tokenBalanceForAddress[msg.sender][idx] + amount > tokenBalanceForAddress[msg.sender][idx]);
+        tokenBalanceForAddress[msg.sender][idx] += amount;
+    }
+
+    function withdrawToken(string symbolName, uint amount) public {
+        require(amount > 0);
+
+        //  get token index
+        uint8 idx = getSymbolIndex(symbolName); 
+        require(idx > 0);
+
+        //  get token address
+        address tokenAddr = tokens[idx].tokenContract;
+        require(tokenAddr != address(0x0));
+
+        //  substract from local tokenBalanceForAddress
+        require(tokenBalanceForAddress[msg.sender][idx] - amount >= 0);
+        require(tokenBalanceForAddress[msg.sender][idx] - amount < tokenBalanceForAddress[msg.sender][idx]);
+
+        tokenBalanceForAddress[msg.sender][idx] -= amount;
+
+        //  create ERC20Interface token instance and transfer tokens
+        ERC20Interface erc20Token = ERC20Interface(tokenAddr);
+        erc20Token.transfer(msg.sender, amount);
+    }
+
+    function getBalance(string symbolName) public view returns (uint) {
+        uint8 idx = getSymbolIndex(symbolName); 
+        require(idx > 0);
+
+        return tokenBalanceForAddress[msg.sender][idx];
+    }
 
 
 
