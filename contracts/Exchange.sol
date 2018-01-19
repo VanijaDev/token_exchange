@@ -52,6 +52,9 @@ contract Exchange is Owned {
     mapping (uint8 => Token) tokens;
     uint8 symbolNameIndex;
 
+    function Exchange() public {
+        
+    }
 
     //////////////
     // BALANCES //
