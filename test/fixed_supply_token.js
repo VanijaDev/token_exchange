@@ -9,6 +9,10 @@ contract('FixedSupplyToken', (accounts) => {
     tokenInst = await FixedSupplyToken.deployed();
   });
 
+  afterEach('reset state', async() => {
+    tokenInst = await FixedSupplyToken.deployed();
+  });
+
   describe('initial values', () => {
     it('ACCOUNT_0 should own all the token supply', async() => {
       let totalSupply = await tokenInst.totalSupply.call();
