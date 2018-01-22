@@ -27,6 +27,15 @@ contract('FixedSupplyToken', (accounts) => {
     });
   });
 
+  describe('token management', () => {
+    it('approve token', async() => {
+      const APPROVED_AMOUNT = 5;
+
+      await tokenInst.approve(ACCOUNT_1, APPROVED_AMOUNT);
+      assert.equal((await tokenInst.allowance(ACCOUNT_0, ACCOUNT_1)).toNumber(), APPROVED_AMOUNT, 'wrong approved amount');
+    });
+  });
+
   describe('token transfers', () => {    
     it('should check token amount after sending between accounts', async() => {
       const SEND_AMOUNT = 111;
