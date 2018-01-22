@@ -32,7 +32,7 @@ contract Exchange is Owned {
 
         string symbolName;
         
-        
+
         mapping (uint => OrderBook) buyBook;
         
         uint curBuyPrice;
@@ -99,6 +99,8 @@ contract Exchange is Owned {
     //////////////////////
 
     function addToken(string symbolName, address erc20TokenAddress) public onlyOwner {
+        require(bytes(symbolName).length > 0);
+        require(erc20TokenAddress != address(0));
         require(!hasToken(symbolName));
 
         symbolNameIndex++;
@@ -110,10 +112,8 @@ contract Exchange is Owned {
 
     function hasToken(string symbolName) public view returns (bool) {
         uint8 index = getSymbolIndex(symbolName);
-        if (index == 0) {
-            return false;
-        }
-        return true;
+        
+        return (index == 0) ? false : true;
     }
 
 
@@ -159,7 +159,7 @@ contract Exchange is Owned {
 
         //  get token address
         address tokenAddr = tokens[idx].tokenContract;
-        require(tokenAddr != address(0x0));
+        require(tokenAddr != address(0));
 
         //  create ERC20Interface token instance
         ERC20Interface erc20Token = ERC20Interface(tokenAddr);
@@ -167,9 +167,9 @@ contract Exchange is Owned {
         //  transfer token amount from sender to exchange
         require(erc20Token.transferFrom(msg.sender, this, amount) == true);
         
-        //  transfer token in local tokenBalanceForAddress
-        require(tokenBalanceForAddress[msg.sender][idx] + amount > tokenBalanceForAddress[msg.sender][idx]);
-        tokenBalanceForAddress[msg.sender][idx] += amount;
+        // //  transfer token in local tokenBalanceForAddress
+        // require(tokenBalanceForAddress[msg.sender][idx] + amount > tokenBalanceForAddress[msg.sender][idx]);
+        // tokenBalanceForAddress[msg.sender][idx] += amount;
     }
 
     function withdrawToken(string symbolName, uint amount) public {
